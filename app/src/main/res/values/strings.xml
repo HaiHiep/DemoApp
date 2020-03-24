@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">DemoApp</string>
+    <string name="btn_Login">Login</string>
+    <string name="btn_Register">Register</string>
+    <string name="forgot_pass">Forgot Password?</string>
+    <string name="user_name">User Name</string>
+    <string name="pass_word">Password</string>
+    <string name="title">Practice</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="cancel">Cancel</string>
+    <string name="register_account">Register Account</string>
+</resources>
