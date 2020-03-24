@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText txtUserName;
     private EditText txtPassword;
     private EditText txtConfirmPassword;
@@ -29,17 +29,18 @@ public class RegisterActivity extends AppCompatActivity {
         btnCancel = (Button) findViewById(R.id.btnCancel);
         db = new DatabaseHelper(this);
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnCancel.setOnClickListener(this);
+        btnRegister.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnCancel:
                 Intent cancelIntent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(cancelIntent);
-            }
-        });
-
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.btnRegister:
                 String username = txtUserName.getText().toString().trim();
                 String password = txtPassword.getText().toString().trim();
                 String confirmpass = txtConfirmPassword.getText().toString().trim();
@@ -64,7 +65,9 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "Password not matching. Try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
-            }
-        });
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = getClass().getSimpleName();
     private EditText txtUserName;
     private EditText txtPassword;
@@ -31,17 +31,19 @@ public class LoginActivity extends AppCompatActivity {
         txtForgotPassword = (TextView) findViewById(R.id.txtForgot);
         db = new DatabaseHelper(this);
 
-        txtRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        txtRegister.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
+        txtForgotPassword.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.txtRegister:
                 Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(registerIntent);
-            }
-        });
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.btnLogin:
                 String username = txtUserName.getText().toString().trim();
                 String password = txtPassword.getText().toString().trim();
                 if (username.equals("") || password.equals("")) {
@@ -55,14 +57,12 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Username or Password is incorrect. Try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
-            }
-        });
-
-        txtForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                break;
+            case R.id.txtForgot:
                 Toast.makeText(LoginActivity.this, "Feature has not yet been processed.", Toast.LENGTH_SHORT).show();
-            }
-        });
+                break;
+            default:
+                break;
+        }
     }
 }
